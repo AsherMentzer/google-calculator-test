@@ -3,7 +3,7 @@
 This project demonstrates automated testing of the Google Calculator using Puppeteer and Jest with TypeScript.
 
 ## Project Structure
-
+```
 project-root/
 │
 ├── src/
@@ -30,7 +30,7 @@ project-root/
 ├── jest.config.js
 ├── package.json
 └── README.md
-
+```
 ## Prerequisites
 
 - Node.js (v14 or later recommended)
