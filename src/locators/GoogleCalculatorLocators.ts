@@ -12,5 +12,5 @@ export const GoogleCalculatorLocators = {
     BUTTON: (jsname: string) => `[jsname="${jsname}"]`,
 
     // Selector for all number buttons (assuming they are 'td' elements)
-    NUMBER_BUTTONS: 'td',
+    BUTTONS: '[role="button"]',
 };

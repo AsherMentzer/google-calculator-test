@@ -32,19 +32,21 @@ export class GoogleCalculatorPage extends BasePage {
 
   // Get the texts of all number buttons on the calculator
   async getNumberButtons(): Promise<string[]> {
-    const selector = `${GoogleCalculatorLocators.CALCULATOR} ${GoogleCalculatorLocators.NUMBER_BUTTONS}`;
-    return this.page.$$eval(selector, (tds: Element[]) => 
-      tds.map(td => td.textContent?.trim() || '')
-        .filter((b) => !isNaN(Number(b)) && b.trim() !== '')
-    );
+    const allButtonsTxt = await this.getAllButtonTexts()
+    return allButtonsTxt.filter((b)=> !isNaN(Number(b)) && b.trim() !== "")      
   }
 
   // Get the texts of all buttons on the calculator
   async getAllButtonTexts(): Promise<string[]> {
-    const selector = `${GoogleCalculatorLocators.CALCULATOR} ${GoogleCalculatorLocators.NUMBER_BUTTONS}`;
-    return this.page.$$eval(selector, (tds: Element[]) => 
-      tds.map(td => td.textContent?.trim() || '')
-    );
+    const selector = `${GoogleCalculatorLocators.CALCULATOR} ${GoogleCalculatorLocators.BUTTONS}`; 
+    return this.page.$$eval(selector, (buttons: Element[]) => 
+          buttons
+            .filter(button => {
+              const style = window.getComputedStyle(button);
+              return style && style.display !== 'none' && button.textContent;
+            })
+            .map(button => button.textContent?.trim() || '')
+        );   
   }
 
   // Helper method to get JavaScript-friendly button name
